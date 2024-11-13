@@ -16,18 +16,20 @@ spec:
       containers:
       - name: nginx
         image: nginx:latest
+        ports:
+        - containerPort: 80
         volumeMounts:
-          - name: html
-            mountPath: /usr/share/nginx/html
-          - name: nginx-config
-            mountPath: /etc/nginx/nginx.conf
-            subPath: nginx.conf
+        - name: nginx-config
+          mountPath: /etc/nginx/nginx.conf
+          subPath: nginx.conf  # Menyuntikkan hanya file nginx.conf ke dalam path yang sesuai
+        - name: html
+          mountPath: /usr/share/nginx/html
       volumes:
-      - name: html
-        gitRepo:
-            repository: "https://github.com/mahendra1231/nginx-deployment.git"
-            revision: "main"  # Ganti dengan branch yang sesuai
-            directory: "web-content"  # Menarik konten web dari folder ini
       - name: nginx-config
         configMap:
-          name: nginx-config
+          name: nginx-config  # Nama ConfigMap yang sudah dibuat sebelumnya
+      - name: html
+        gitRepo:
+          repository: "https://github.com/mahendra1231/nginx-deployment.git"
+          revision: "main"
+          directory: "web-content"
