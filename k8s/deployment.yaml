@@ -22,6 +22,6 @@ spec:
       volumes:
         - name: html
           gitRepo:
-            repository: "https://github.com/Putumerta-collab/deploy_nodeapp.git"
+            repository: "https://github.com/mahendra1231/nginx-deployment.git"
             revision: "main"  # Ganti dengan branch yang sesuai
-            directory: "test"  # Menarik konten web dari folder ini
+            directory: "web-content"  # Menarik konten web dari folder ini
