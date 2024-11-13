@@ -24,4 +24,4 @@ spec:
           gitRepo:
             repository: "https://github.com/Putumerta-collab/deploy_nodeapp.git"
             revision: "main"  # Ganti dengan branch yang sesuai
-            directory: "nodeapp_test"  # Menarik konten web dari folder ini
+            directory: ""  # Menarik konten web dari folder ini
