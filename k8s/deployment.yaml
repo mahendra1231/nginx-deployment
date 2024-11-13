@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-deployment
-  namespace: default
+  namespace: argocd
 spec:
   replicas: 1
   selector:
@@ -14,14 +14,20 @@ spec:
         app: nginx
     spec:
       containers:
-        - name: nginx
-          image: nginx:latest
-          volumeMounts:
-            - name: html
-              mountPath: /usr/share/nginx/html
+      - name: nginx
+        image: nginx:latest
+        volumeMounts:
+          - name: html
+            mountPath: /usr/share/nginx/html
+          - name: nginx-config
+            mountPath: /etc/nginx/nginx.conf
+            subPath: nginx.conf
       volumes:
-        - name: html
-          gitRepo:
+      - name: html
+        gitRepo:
             repository: "https://github.com/mahendra1231/nginx-deployment.git"
             revision: "main"  # Ganti dengan branch yang sesuai
             directory: "web-content"  # Menarik konten web dari folder ini
+      - name: nginx-config
+        configMap:
+          name: nginx-config
